@@ -1,0 +1,27 @@
+Before deploy:
+2. problem keep getting timeout:
+a. check if pool.close() in workflow a.1.7 solve this problem.
+b. if any timeout throw err, then restart server with systemd, do not send any timeout error to line. 
+3. change log.txt directory to usr/bs0271/... on Lunix. 
+
+ask:
+COPMB的日期會建議使用訂單的創建日期嗎？對
+生效單=訂單日期
+
+aware：
+If new contract add it into map folder.
+如果需要拆單，將同一筆訂單路段於不同銷貨單分批結(例如先結80%、再結20%):
+訂單數量需大於一
+
+problem to solve:
+if case not in 銷貨單 will 結帳單 fail to import?
+如果有新的銷貨單近來可以過帳嗎?
+if 沖帳(by 結帳單), disable change to 銷貨單
+12. If 結帳單確認(COPTH結帳單!=0), then workflow b & d is not allow. 
+if any errorControl != 0(ex: got timeout.), needs to sync again.
+
+Todo:
+4. (workflow c)建立結帳單(預計收款日、預計兌現日+14天)
+驗算金額
+
+

@@ -1,0 +1,93 @@
+ERP work flow:
+1. 品號資料建立作業:
+建立INVMB
+
+2. 訂單建立作業:
+確認訂單前:
+建立COPTC
+建立COPTD
+確認訂單後:
+建立COPMB (check out google sheet)
+修改COPTC
+修改COPTD
+
+3. 銷貨單建立作業:
+確認銷貨單前:
+建立COPTG
+建立COPTH
+確認銷貨單後:
+修改COPMA (不使用客戶檔、不做修改)
+修改COPMB 
+建立INVLD(進貨單or銷貨單)
+
+workflow a: 品號建立與訂單確認
+first case:
+1.
+NoninitialCase::
+1.
+
+workflow b: 銷貨單建立、分錄、拋轉、過帳：
+
+first case:
+1. update COPTD(TD020 = caseNo)
+2. create COPTH
+3. create COPTG,and save dteam_succ into ERPmiscellaneousCostWaiting
+4. update COPMB
+5. create INVLD
+6. AJSTA
+AJSTA分錄底稿單頭檔 分錄底稿單號=產生日期+流水號, PCB
+AJSTB分錄底稿單身檔 PCB
+AJSLA來源單據紀錄檔 sourcePCB
+
+ACTTA會計傳票單頭檔accountEntry 
+ACTTB會計傳票單身檔accountEntry 
+傳票單號 = 傳票(銷貨單)日期+流水號
+
+ACTML分類帳檔 categorically accounting
+ACTMN立沖帳目分類帳檔(會計傳票有立沖才會出現、立沖帳單頭) detail head
+會計傳票有立沖才會出現:
+ACTMM立沖帳目金額檔 monthly detail 
+ACTMB會計科目各期額檔 monthly accounting
+ACTMD部門科目各期金額檔 monthly department accounting
+
+依銷貨單月份數建立/修改: ACTMB(base on month)、ACTMD(base on month, department)、ACTMM(base on month and clinet)
+建立：ACTML、ACTMN、ACTTA、ACTTB、AJSLA、AJSTA、AJSTB、COPTG、COPTH、INVLD
+修改：COPTD、COPMB(by caseNo)
+NoninitialCase:
+modify:
+1. update COPTD(TD020 = caseNo)
+2. create COPTH
+3. update COPTG in amount and price, and fix/update COPTH with highest price.
+4. update COPMB
+5. create INVLD
+6. 
+ACTMB, ACTMD(base on month)
+ACTML(base on ML009 = dteam + succ)
+ACTMN(base on MN010 = dteam + succ)
+ACTMM(base on clinet number and month)
+ACTTA(base on TA009 = dteam + succ)
+AJSLA()
+AJSTA(base on TA010 = dteam + succ)
+AJSTB(base on TB010 = dteam + succ)
+
+create: 
+ACTTB(base on TB010 = dteam + succ)
+COPTH(base on COPTG020)
+INVLD
+
+workflow c: 結帳單建立作業:
+First: 
+建立ACRTA
+建立ACRTB
+
+workflow d: 新增雜費於銷貨單
+1. get dteam, succ from table ERPmiscellaneousCostWaiting, get miscellaneousCost from rm100. // d.1
+2. create COPTH. // d.1
+2. update COPTG in amount and price, fix/update COPTH with highest price, get ERP information from COPTG. //d.2
+3. create COPMB. // d.3 
+4. create INVLD. // d.4
+5. // d.5
+
+
+
+

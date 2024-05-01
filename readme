@@ -1,0 +1,49 @@
+0. 從大公司借來的天條：
+function都要檢查input value、若調用其他function檢查return value。
+
+1. 可以使用的env：
+MODE = 必須、DEVELOP or PRODUCTION
+SYNC_INTERVAL = 必須、每個請求間隔時間(微秒)。
+ATTEMPT = 非必須、錯誤幾次終止程式、不建議使用。
+TIMEMACHINE = 非必須、手動指派進入ERP的資料日期、當日ERP流水號超過時可使用。
+!important!
+注：三個Sync table都要有至少一行資料(sql table)，建議用{0: 0};
+
+2. 資料夾結構:
+/DB_config
+存放資料庫帳密的地方。
+/map
+存放對照表的地方。
+/models
+存放sql query 的地方。
+/production
+存放從開發到生產的所有步驟。
+/util
+存放非上述functions 的地方。
+3. 框架:
+express：
+    用於API建立。
+mssql：
+    用於溝通資料庫。
+urllib：
+    用於溝通LINE bot server。
+    
+4. 命名原則：
+資料夾名稱：
+以-隔開，皆為小寫，使用複數。
+檔案名稱：
+同資料夾名稱。
+functions:
+第一碼為小寫，單字間以大寫區隔。
+第一單字為動詞，例如get、handle、set、use、check等。
+變數：
+第一碼小寫，單字間以大寫區隔。
+以名詞命名。
+若有變數具有單位概念，可以單位名稱結尾。
+    Boolean:
+        以is開頭。
+    Array:
+        以list結尾。
+Class:
+    第一碼為大寫，單字間以大寫間隔。
+    以名詞命名。

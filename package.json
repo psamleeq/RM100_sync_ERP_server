@@ -1,0 +1,19 @@
+{
+  "name": "ERPsync_server",
+  "version": "1.0.0",
+  "description": "Insert case in ERP_INVMB from 214_rm100_case",
+  "main": "ERPsync_server.js",
+  "scripts": {
+    "start": "node utils/forever-production-exit-with-crash.js",
+    "test": "node utils/forever-develop-exit-with-crash.js"
+  },
+  "author": "bs0271",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.18.2",
+    "forever": "^4.0.3",
+    "forever-monitor": "^3.0.3",
+    "mssql": "^10.0.1",
+    "urllib": "^3.22.2"
+  }
+}
