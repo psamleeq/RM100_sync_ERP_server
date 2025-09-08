@@ -1,0 +1,7 @@
+copy all stored procedures in database [TEST] into [SDG]
+change .env file variable MODE into 'PRODUCTION'
+change start of sync function 
+from 
+main({ 'next':'a.1-1', 'start':'a.1-1', 'try': 0 });
+to 
+main({ 'next':'0', 'start':'d.0', 'try': 0 });
